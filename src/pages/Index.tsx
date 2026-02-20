@@ -12,8 +12,8 @@ interface LinkItem {
 }
 
 const links: LinkItem[] = [
-  { icon: "/src/assets/logo.png", label: "Portfolio Website", href: "https://kuzufolio.vercel.app/", accent: "blue" as const, isImage: true },
-  { icon: "/src/assets/xoralogo.jpeg", label: "Xora GTPS", href: "https://xoraps.vercel.app", accent: "purple" as const, isImage: true },
+  { icon: "/logo.png", label: "Portfolio Website", href: "https://kuzufolio.vercel.app/", accent: "blue" as const, isImage: true },
+  { icon: "/xoralogo.jpeg", label: "Xora GTPS", href: "https://xoraps.vercel.app", accent: "purple" as const, isImage: true },
   { icon: "fa-brands fa-github", label: "GitHub Repo", href: "https://github.com/BakuProje", accent: "green" as const },
   { icon: "fa-brands fa-tiktok", label: "TikTok", href: "https://www.tiktok.com/@kuzuroken", accent: "green" as const },
   { icon: "fa-brands fa-discord", label: "Discord Server", href: "#", accent: "purple" as const },
@@ -21,7 +21,7 @@ const links: LinkItem[] = [
 
 const Index = () => {
   const playClickSound = () => {
-    const audio = new Audio('/src/assets/klik.mp3');
+    const audio = new Audio('/klik.mp3');
     audio.volume = 0.5;
     audio.play().catch(console.error);
   };
