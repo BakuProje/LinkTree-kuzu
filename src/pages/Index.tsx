@@ -2,29 +2,19 @@ import MatrixRain from "@/components/MatrixRain";
 import NetworkNodes from "@/components/NetworkNodes";
 import ProfileHeader from "@/components/ProfileHeader";
 import LinkCard from "@/components/LinkCard";
-
-interface LinkItem {
-  icon: string;
-  label: string;
-  href: string;
-  accent: "blue" | "green" | "purple";
-  isImage?: boolean;
-}
-
-const links: LinkItem[] = [
-  { icon: "/logo.png", label: "Portfolio Website", href: "https://kuzufolio.vercel.app/", accent: "blue" as const, isImage: true },
-  { icon: "/logonobg.png", label: "PRG Rental", href: "https://prgrental.vercel.app/", accent: "purple" as const, isImage: true },
-  { icon: "fa-brands fa-github", label: "GitHub Repo", href: "https://github.com/BakuProje", accent: "green" as const },
-  { icon: "fa-brands fa-tiktok", label: "TikTok", href: "https://www.tiktok.com/@kuzuroken", accent: "green" as const },
-  { icon: "fa-brands fa-discord", label: "Discord Server", href: "#", accent: "purple" as const },
-];
+import { useLinkData } from "@/hooks/useLinkData";
 
 const Index = () => {
+  const { links, profile, isLoading } = useLinkData();
+
   const playClickSound = () => {
     const audio = new Audio('/klik.mp3');
     audio.volume = 0.5;
     audio.play().catch(console.error);
   };
+
+  if (isLoading) return null;
+
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Background effects */}
@@ -47,13 +37,18 @@ const Index = () => {
       {/* Main content */}
       <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-12">
         <div className="w-full max-w-md">
-          <ProfileHeader onClickSound={playClickSound} />
+          <ProfileHeader 
+            onClickSound={playClickSound} 
+            name={profile.name} 
+            subtitle={profile.subtitle} 
+            avatar={profile.avatar}
+          />
 
           {/* Links */}
           <div className="flex flex-col gap-3">
             {links.map((link, i) => (
               <LinkCard
-                key={link.label}
+                key={link.id}
                 icon={link.icon}
                 label={link.label}
                 href={link.href}
@@ -65,35 +60,7 @@ const Index = () => {
             ))}
           </div>
 
-          {/* Social Footer */}
-          <div className="mt-12 flex items-center justify-center gap-8">
-            <a
-              href="https://www.tiktok.com/@kuzuroken"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative p-3 transition-all duration-300 hover:scale-110"
-              onClick={playClickSound}
-            >
-              <i className="fa-brands fa-tiktok text-2xl text-muted-foreground hover:text-neon-blue transition-colors duration-300" />
-              {/* Tooltip */}
-              <div className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                TikTok
-              </div>
-            </a>
-            <a
-              href="https://www.instagram.com/kuzuroken.20"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative p-3 transition-all duration-300 hover:scale-110"
-              onClick={playClickSound}
-            >
-              <i className="fa-brands fa-instagram text-2xl text-muted-foreground hover:text-neon-purple transition-colors duration-300" />
-              {/* Tooltip */}
-              <div className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                Instagram
-              </div>
-            </a>
-          </div>
+
         </div>
       </main>
     </div>

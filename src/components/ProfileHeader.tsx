@@ -3,16 +3,13 @@ import logoImg from "@/assets/logo.png";
 
 interface ProfileHeaderProps {
   onClickSound?: () => void;
+  name: string;
+  subtitle: string;
+  avatar: string;
 }
 
-const ProfileHeader = ({ onClickSound }: ProfileHeaderProps) => {
+const ProfileHeader = ({ onClickSound, name, subtitle, avatar }: ProfileHeaderProps) => {
   const [ping, setPing] = useState<number | null>(null);
-  const [isDark, setIsDark] = useState(true);
-
-  // Initialize theme
-  useEffect(() => {
-    document.documentElement.classList.add("dark");
-  }, []);
 
   // Ping measurement
   useEffect(() => {
@@ -33,19 +30,6 @@ const ProfileHeader = ({ onClickSound }: ProfileHeaderProps) => {
     return () => clearInterval(interval);
   }, []);
 
-  const toggleTheme = () => {
-    if (onClickSound) {
-      onClickSound();
-    }
-    const next = !isDark;
-    setIsDark(next);
-    if (next) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
-
   const getPingColor = () => {
     if (ping === null) return "text-muted-foreground";
     if (ping < 100) return "text-emerald-400";
@@ -55,22 +39,12 @@ const ProfileHeader = ({ onClickSound }: ProfileHeaderProps) => {
 
   return (
     <div className="flex flex-col items-center gap-5 mb-10">
-      {/* Theme toggle */}
-      <button
-        onClick={toggleTheme}
-        className="absolute top-4 right-4 z-20 glass-card neon-border-blue px-3 py-2 rounded-lg 
-          text-xs font-mono-cyber text-foreground hover:scale-105 transition-transform flex items-center gap-2"
-      >
-        <i className={`fa-solid ${isDark ? "fa-sun" : "fa-moon"}`} />
-        <span>{isDark ? "LIGHT" : "DARK"}</span>
-      </button>
-
       {/* Logo with neon ring */}
       <div className="relative">
-        <div className="w-28 h-28 rounded-full glow-pulse neon-border-blue border-2 p-1 float-slow">
+        <div className="w-28 h-28 rounded-full glow-pulse neon-border-blue border-2 p-1 float-slow overflow-hidden">
           <img
-            src={logoImg}
-            alt="Kuzuroken Logo"
+            src={avatar}
+            alt={name}
             className="w-full h-full rounded-full object-cover"
           />
         </div>
@@ -81,10 +55,10 @@ const ProfileHeader = ({ onClickSound }: ProfileHeaderProps) => {
       {/* Name & Bio */}
       <div className="text-center">
         <h1 className="text-3xl font-bold neon-text-blue font-mono-cyber tracking-wider">
-          Kuzuroken
+          {name}
         </h1>
         <p className="text-muted-foreground mt-2 text-sm tracking-widest uppercase font-mono-cyber">
-          &gt; Jelajahi Dunia Digital_
+          &gt; {subtitle}_
         </p>
       </div>
 
