@@ -15,10 +15,11 @@ export interface ProfileData {
   avatar: string;
   tiktokUrl: string;
   instagramUrl: string;
+  status: "online" | "offline" | "maintenance";
 }
 
 const DEFAULT_LINKS: LinkItem[] = [
-  { id: "1", icon: "/logo.png", label: "Portfolio Website", href: "https://kuzufolio.vercel.app/", accent: "blue", isImage: true },
+  { id: "1", icon: "/kuzunobglogo.png", label: "Portfolio Website", href: "https://kuzufolio.vercel.app/", accent: "blue", isImage: true },
   { id: "2", icon: "/logonobg.png", label: "Rental PS", href: "https://www.prgrental.site/", accent: "blue", isImage: true },
   { id: "3", icon: "/logo full.png", label: "UKK XII TKJ", href: "https://ukktkj.vercel.app/", accent: "blue", isImage: true },
   { id: "4", icon: "fa-brands fa-github", label: "GitHub Repo", href: "https://github.com/BakuProje", accent: "blue" },
@@ -29,9 +30,10 @@ const DEFAULT_LINKS: LinkItem[] = [
 const DEFAULT_PROFILE: ProfileData = {
   name: "Kuzuroken",
   subtitle: "Jelajahi Dunia Digital",
-  avatar: "/logo.png",
+  avatar: "/kuzunobglogo.png",
   tiktokUrl: "https://www.tiktok.com/@kuzuroken",
   instagramUrl: "https://www.instagram.com/kuzuroken.20",
+  status: "online",
 };
 
 export const useLinkData = () => {
@@ -59,7 +61,7 @@ export const useLinkData = () => {
       setProfile(DEFAULT_PROFILE);
       localStorage.setItem("kuzu_profile", JSON.stringify(DEFAULT_PROFILE));
     }
-    
+
     setIsLoading(false);
   }, []);
 

@@ -1,5 +1,4 @@
-import MatrixRain from "@/components/MatrixRain";
-import NetworkNodes from "@/components/NetworkNodes";
+import CosmicBackground from "@/components/CosmicBackground";
 import ProfileHeader from "@/components/ProfileHeader";
 import LinkCard from "@/components/LinkCard";
 import { useLinkData } from "@/hooks/useLinkData";
@@ -18,18 +17,27 @@ const Index = () => {
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Background effects */}
-      <MatrixRain />
-      <NetworkNodes />
+      <CosmicBackground />
 
-      {/* Grid overlay */}
+      {/* Portal Glow Effect */}
+      <div 
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none opacity-20"
+        style={{
+          background: 'radial-gradient(circle, hsl(210 100% 55% / 0.4) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+          zIndex: 1
+        }}
+      />
+
+      {/* Grid overlay - more subtle for cosmic theme */}
       <div
-        className="fixed inset-0 pointer-events-none opacity-[0.03]"
+        className="fixed inset-0 pointer-events-none opacity-[0.02]"
         style={{
           backgroundImage: `
             linear-gradient(hsl(180 100% 50% / 0.3) 1px, transparent 1px),
             linear-gradient(90deg, hsl(180 100% 50% / 0.3) 1px, transparent 1px)
           `,
-          backgroundSize: "60px 60px",
+          backgroundSize: "80px 80px",
           zIndex: 2,
         }}
       />
@@ -42,6 +50,7 @@ const Index = () => {
             name={profile.name} 
             subtitle={profile.subtitle} 
             avatar={profile.avatar}
+            status={profile.status}
           />
 
           {/* Links */}
