@@ -21,10 +21,7 @@ export interface ProfileData {
 const DEFAULT_LINKS: LinkItem[] = [
   { id: "1", icon: "/kuzunobglogo.png", label: "Portfolio Website", href: "https://kuzufolio.vercel.app/", accent: "blue", isImage: true },
   { id: "2", icon: "/logonobg.png", label: "Rental PS", href: "https://www.prgrental.site/", accent: "blue", isImage: true },
-  { id: "3", icon: "/logo full.png", label: "UKK XII TKJ", href: "https://ukktkj.vercel.app/", accent: "blue", isImage: true },
-  { id: "4", icon: "fa-brands fa-github", label: "GitHub Repo", href: "https://github.com/BakuProje", accent: "blue" },
-  { id: "5", icon: "fa-brands fa-tiktok", label: "TikTok", href: "https://www.tiktok.com/@kuzuroken", accent: "blue" },
-  { id: "6", icon: "fa-brands fa-discord", label: "Discord Server", href: "#", accent: "blue" },
+  { id: "3", icon: "fa-brands fa-tiktok", label: "TikTok", href: "https://www.tiktok.com/@kuzuroken", accent: "blue" },
 ];
 
 const DEFAULT_PROFILE: ProfileData = {
