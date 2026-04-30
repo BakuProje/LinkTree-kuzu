@@ -33,6 +33,8 @@ const DEFAULT_PROFILE: ProfileData = {
   status: "online",
 };
 
+const STORAGE_VERSION = "1.1"; // Increment this to force update defaults
+
 export const useLinkData = () => {
   const [links, setLinks] = useState<LinkItem[]>([]);
   const [profile, setProfile] = useState<ProfileData>(DEFAULT_PROFILE);
@@ -41,15 +43,17 @@ export const useLinkData = () => {
   useEffect(() => {
     const savedLinks = localStorage.getItem("kuzu_links");
     const savedProfile = localStorage.getItem("kuzu_profile");
+    const savedVersion = localStorage.getItem("kuzu_version");
 
-    if (savedLinks) {
+    if (savedLinks && savedVersion === STORAGE_VERSION) {
       // Force all links to blue accent to match portfolio theme
       const parsedLinks = JSON.parse(savedLinks).map((l: LinkItem) => ({ ...l, accent: "blue" }));
       setLinks(parsedLinks);
-      localStorage.setItem("kuzu_links", JSON.stringify(parsedLinks));
     } else {
+      // Reset to defaults if version mismatch or no data
       setLinks(DEFAULT_LINKS);
       localStorage.setItem("kuzu_links", JSON.stringify(DEFAULT_LINKS));
+      localStorage.setItem("kuzu_version", STORAGE_VERSION);
     }
 
     if (savedProfile) {
